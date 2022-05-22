@@ -6,7 +6,8 @@ export default createStore({
   plugins: [createPersistedState()],
   state: {
     pokemons: [],
-    pokemonCardDetails: []
+    pokemonCardDetails: [],
+    nextPage: null
   },
   getters: {
     getPokemonCardDetailByName: state => name => state.pokemonCardDetails.find(poke => poke.name === name),
@@ -14,15 +15,16 @@ export default createStore({
   },
   mutations: {
     setPokemonList(state, pokemonList) {
-      state.pokemons = pokemonList.results;
+      state.pokemons = state.pokemons.concat(pokemonList.results);
+      state.nextPage = pokemonList.next;
     },
     setPokemonCardDetail(state, pokemonCardDetail) {
       state.pokemonCardDetails.push(pokemonCardDetail);
     }
   },
   actions: {
-    async GetPokemonsAction({ commit }) {
-      const pokemonList = await dataService.getPokemons();
+    async GetPokemonsAction({ commit }, paginationUrl = null) {
+      const pokemonList = await dataService.getPokemons(paginationUrl);
       commit('setPokemonList', pokemonList);
     },
     async GetPokemonCardDetailAction({ commit }, name) {

@@ -20,13 +20,21 @@ export default {
         loadPokemons() {
             if(this.pokemons.length === 0)
                 this.GetPokemonsAction();
+        },
+        handleScroll() {
+            if(window.scrollY + window.innerHeight >= document.body.scrollHeight - 50) {
+                this.GetPokemonsAction(this.nextPage);
+            }
         }
     },
     created() {
         this.loadPokemons();
     },
+    mounted() {
+        window.addEventListener('scroll', this.handleScroll);
+    },
     computed: {
-        ...mapState(['pokemons'])
+        ...mapState(['pokemons', 'nextPage']),
     },
     components: { PokemonCard }
 }

@@ -1,15 +1,15 @@
 <template>
-    <div class="card" v-if="pokemonDetail">
+    <div class="card" v-if="pokemonCardDetail">
         <div class="card-image">
             <figure class="image is-4by3">
-                <img :src="pokemonDetail.sprites.front_default" alt="Placeholder image">
+                <img :src="pokemonCardDetail.image" alt="Placeholder image">
             </figure>
         </div>
         <div class="card-content">
             <div class="media">
                 <div class="media-left">
                     <figure class="image is-48x48">
-                        <img :src="pokemonDetail.sprites.front_default" alt="Placeholder image">
+                        <img :src="pokemonCardDetail.image" alt="Placeholder image">
                     </figure>
                 </div>
                 <div class="media-content">
@@ -30,21 +30,29 @@
 </template>
 
 <script>
-import axios  from 'axios';
+// import axios  from 'axios';
+import { mapGetters, mapActions } from 'vuex';
 export default {
     name: 'pokemon-card',
     data() {
         return {
-            pokemonDetail: undefined
+            pokemonCardDetail: undefined
         }
     },
     methods: {
-        async loadPokemonDetails() {
-            await axios.get(this.pokemon.url).then(response => this.pokemonDetail = response.data);
+        ...mapActions(['GetPokemonCardDetailAction']),
+        async loadPokemonCardDetails() {
+            if(!this.pokemonExistsInStore(this.pokemon.name))
+                await this.GetPokemonCardDetailAction(this.pokemon.name);
+
+            this.pokemonCardDetail = this.getPokemonCardDetailByName(this.pokemon.name);
         }
     },
     async created() {
-        await this.loadPokemonDetails()
+        await this.loadPokemonCardDetails()
+    },
+    computed: {
+        ...mapGetters(['getPokemonCardDetailByName', 'pokemonExistsInStore']),
     },
     props: {
         pokemon: {

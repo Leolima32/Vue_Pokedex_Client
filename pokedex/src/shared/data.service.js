@@ -16,9 +16,9 @@ const getPokemons = async function () {
     }
 };
 
-const getPokemonDetails = async function (pokemonName) {
+const getPokemonCardDetails = async function (pokemonName) {
     try {
-        const response = await axios.get(`${API_URL}/pokemon/${pokemonName}`);
+        const response = await axios.get(`${API_URL}pokemon/${pokemonName}`);
 
         if (response.status !== 200)
             throw Error(response.message);
@@ -33,5 +33,5 @@ const getPokemonDetails = async function (pokemonName) {
 
 export const DataService = {
     getPokemons,
-    getPokemonDetails
+    getPokemonCardDetails
 }

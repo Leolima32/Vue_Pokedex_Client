@@ -3,8 +3,8 @@ import axios from 'axios';
 
 const getPokemons = async function () {
     try {
-        const response = await axios.get(`${API_URL}/pokemon`);
-
+        const response = await axios.get(`${API_URL}pokemon/`);
+        
         if (response.status !== 200)
             throw Error(response.message);
 

@@ -9,8 +9,8 @@ export default createStore({
   getters: {
   },
   mutations: {
-    setPokemonList(pokemonList) {
-      state.pokemons.push(pokemonList);
+    setPokemonList(state, pokemonList) {
+      state.pokemons = pokemonList.results;
     }
   },
   actions: {

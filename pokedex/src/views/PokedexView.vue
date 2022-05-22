@@ -18,7 +18,7 @@ export default {
     methods: {
         ...mapActions(['GetPokemonsAction']),
         loadPokemons() {
-            // if(this.pokemons.count === 0)
+            if(this.pokemons.length === 0)
                 this.GetPokemonsAction();
         }
     },

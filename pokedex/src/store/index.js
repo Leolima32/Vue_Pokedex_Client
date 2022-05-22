@@ -1,7 +1,9 @@
 import { createStore } from 'vuex'
 import { DataService as dataService } from '@/shared/data.service' 
+import createPersistedState from "vuex-persistedstate";
 
 export default createStore({
+  plugins: [createPersistedState()],
   state: {
     pokemons: [],
     pokemondDetails: []

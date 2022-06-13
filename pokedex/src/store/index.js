@@ -15,7 +15,7 @@ export default createStore({
   },
   mutations: {
     setPokemonList(state, pokemonList) {
-      state.pokemons = state.pokemons.concat(pokemonList.results);
+      state.pokemons = [...state.pokemons.concat(pokemonList.results)];
       state.nextPage = pokemonList.next;
     },
     setPokemonCardDetail(state, pokemonCardDetail) {

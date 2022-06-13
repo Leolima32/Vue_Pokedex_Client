@@ -32,7 +32,10 @@ export default createStore({
       //map only needed properties
       let pokemonCardDetail = {
         name: pokemonCardDetailResult.name,
-        image: pokemonCardDetailResult.sprites.front_default
+        image: pokemonCardDetailResult.sprites.front_default,
+        types: pokemonCardDetailResult.types.map(t => {
+          return t.type
+        })
       };
       commit('setPokemonCardDetail', pokemonCardDetail);
     }

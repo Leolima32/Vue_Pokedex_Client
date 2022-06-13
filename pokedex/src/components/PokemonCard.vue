@@ -14,6 +14,11 @@
                 </div>
                 <div class="media-content">
                     <p class="title is-4">{{ pokemon.name }}</p>
+                    <ul class="type_list">
+                       <li v-for="type in pokemonCardDetail.types" :key="type.name">
+                            <a>{{type.name}}</a>
+                       </li> 
+                    </ul>
                     <!-- <p class="subtitle is-6">@johnsmith</p> -->
                 </div>
             </div>
@@ -69,5 +74,20 @@ export default {
 .card-image:hover {
     background-color: #DDD;
     transition: fill 0.55s;
+}
+
+.type {
+    justify-content: center;
+    height: 2em;
+    color: #FFF;
+    text-shadow: 1px 1px 1px #333;
+    width: 5em;
+    border: 1px solid #000;
+    border-radius: 5px;
+}
+
+.type_list li {
+    list-style: none;
+    display: inline;
 }
 </style>

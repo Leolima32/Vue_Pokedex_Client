@@ -1,12 +1,13 @@
 <template>
-    <div class="container">
-        <div class="columns is-multiline">
-            <div class="column is-one-quarter" v-for="pokemon in pokemons" :key="pokemon.name">
-                <PokemonCard :pokemon="pokemon" />
+    <section>
+        <div class="container">
+            <div class="columns is-multiline">
+                <div class="column is-one-quarter" v-for="pokemon in pokemons" :key="pokemon.name">
+                    <PokemonCard :pokemon="pokemon" />
+                </div>
             </div>
-
         </div>
-    </div>
+    </section>
 </template>
 
 <script>
@@ -18,11 +19,11 @@ export default {
     methods: {
         ...mapActions(['GetPokemonsAction']),
         loadPokemons() {
-            if(this.pokemons.length === 0)
+            if (this.pokemons.length === 0)
                 this.GetPokemonsAction();
         },
         handleScroll() {
-            if(window.scrollY + window.innerHeight >= document.body.scrollHeight - 50) {
+            if (window.scrollY + window.innerHeight >= document.body.scrollHeight - 50) {
                 this.GetPokemonsAction(this.nextPage);
             }
         }
